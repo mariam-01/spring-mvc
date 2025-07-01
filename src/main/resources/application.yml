@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: spring-mvc
+  datasource:
+    url: jdbc:h2:mem:products_db
+    username: user
+    password: user
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+server:
+  port: 8020
+  error:
+    include-message: always
+    include-binding-errors: always
+
+logging:
+  level:
+    org.springframework: INFO
+    ma.bdcc.springmvc: DEBUG
