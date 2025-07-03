@@ -1,10 +1,7 @@
 package ma.bdcc.springmvc.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 @Getter
@@ -21,20 +18,19 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotNull
-    @NotEmpty
+    @NotBlank(message = "Le nom est obligatoire")
     @Size(min = 2, max = 200)
     private String name;
 
-    @NotNull
+    @NotBlank(message = "La description est obligatoire")
     private String description;
 
     @NotNull
-    @Min(0)
+    @Min(value = 0, message = "Le prix doit être positif")
     private double price;
 
     @NotNull
-    @Min(0)
+    @Min(value = 1, message = "La quantité minimale autorisée est 1")
     private double quantity;
 
 }
