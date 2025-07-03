@@ -2,19 +2,27 @@ spring:
   application:
     name: spring-mvc
   datasource:
-    url: jdbc:h2:mem:products_db
-    username: user
-    password: user
-    driverClassName: org.h2.Driver
+#    url: jdbc:h2:mem:products_db
+#    username: user
+#    password: user
+#    driverClassName: org.h2.Driver
+
+    url: jdbc:postgresql://localhost:5432/products_db
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+#    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
     hibernate:
       ddl-auto: update
     show-sql: true
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+#  h2:
+#    console:
+#      enabled: true
+#      path: /h2-console
 
 server:
   port: 8020
