@@ -16,31 +16,31 @@ public class ProductController {
 
     private final ProductRepo productRepo;
 
-    @GetMapping()
+    @GetMapping("/all")
     public String getAllProducts(Model model) {
         model.addAttribute("products", productRepo.findAll());
         return "products";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/admin/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
         productRepo.deleteById(id);
-        return "redirect:/products";
+        return "redirect:/products/all";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/admin/add")
     public String showProductForm(Model model) {
         model.addAttribute("product", new Product());
         return "addProduct";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/admin/add")
     public String addProduct(@Valid Product product, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "addProduct";
 
         productRepo.save(product);
-        return "redirect:/products";
+        return "redirect:/products/all";
     }
 
     /*@GetMapping("/{id}")

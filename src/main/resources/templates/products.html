@@ -3,39 +3,42 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout"
 >
-<head>
-    <title>Liste des produits</title>
-</head>
+    <head>
+        <title>Liste des produits</title>
+    </head>
+    <body>
 
-<!-- Contenu injecté dans le fragment layout :: section -->
-<section>
-    <div layout:fragment="content">
-        <div class="d-flex justify-content-between align-items-center mb-3" >
-            <h1>Liste des produits</h1>
-            <a class="btn btn-success" th:href="@{/products/add}">+ Nouveau produit</a>
-        </div>
+        <!-- Contenu injecté dans le fragment layout :: section -->
+        <section>
+            <div layout:fragment="content">
+                <div class="d-flex justify-content-between align-items-center mb-3" >
+                    <h1>Liste des produits</h1>
+                    <a sec:authorize="hasRole('ADMIN')"
+                       class="btn btn-success"
+                       th:href="@{/products/admin/add}">+ Nouveau produit</a>
+                </div>
 
-        <table class="table table-striped">
-            <thead class="table-dark">
-            <tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Prix</th>
-                <th>Description</th>
-                <th>Quantité</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="product : ${products}">
-                <td th:text="${product.id}"></td>
-                <td th:text="${product.name}"></td>
-                <td th:text="${#numbers.formatDecimal(product.price, 1, 'COMMA', 2, 'POINT')} + ' $' "></td>
-                <td th:text="${product.description}"></td>
-<!--
-                <td th:text="${product.quantity.intValue()}"></td>
--->
-                <td th:text="${#numbers.formatDecimal(product.quantity, 1, 'POINT', 0, 'NONE')}"></td>
+                <table class="table table-striped">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Prix</th>
+                        <th>Description</th>
+                        <th>Quantité</th>
+                        <th sec:authorize="hasRole('ADMIN')">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="product : ${products}">
+                        <td th:text="${product.id}"></td>
+                        <td th:text="${product.name}"></td>
+                        <td th:text="${#numbers.formatDecimal(product.price, 1, 'COMMA', 2, 'POINT')} + ' $' "></td>
+                        <td th:text="${product.description}"></td>
+        <!--
+                        <td th:text="${product.quantity.intValue()}"></td>
+        -->
+                        <td th:text="${#numbers.formatDecimal(product.quantity, 1, 'POINT', 0, 'NONE')}"></td>
 
                 <td>
                     <a
@@ -52,3 +55,22 @@
         </table>
     </div>
 </section>
+                        <td sec:authorize="hasRole('ADMIN')">
+                            <div class="btn-group gap-lg-5 me-lg-5" role="group" aria-label="Actions">
+
+                                <a class="btn btn-sm btn-danger"
+                                   th:href="@{|/products/admin/delete/${product.id}|}"
+                                   th:onclick="|return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');|">
+                                    Supprimer
+                                </a>
+
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(products)}">
+                        <td colspan="5" class="text-center">Aucun produit trouvé.</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+

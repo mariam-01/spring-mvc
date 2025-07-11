@@ -16,7 +16,7 @@ public class SpringMvcApplication {
 
     }
 
-    @Bean
+    /*@Bean
     CommandLineRunner start (ProductRepo productRepo) {
         return args -> {
             productRepo.save(Product.builder()
@@ -28,6 +28,6 @@ public class SpringMvcApplication {
             var products = productRepo.findAll();
             products.forEach(System.out::println);
         };
-    }
+    }*/
 
 }
