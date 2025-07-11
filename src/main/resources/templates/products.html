@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity"
       layout:decorate="layout"
 >
     <head>
@@ -40,21 +41,6 @@
         -->
                         <td th:text="${#numbers.formatDecimal(product.quantity, 1, 'POINT', 0, 'NONE')}"></td>
 
-                <td>
-                    <a
-                            class="btn btn-danger btn-sm"
-                            th:href="@{'/products/delete/' + ${product.id}}"
-                            onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');"
-                    >Supprimer</a>
-                </td>
-            </tr>
-            <tr th:if="${#lists.isEmpty(products)}">
-                <td colspan="5" class="text-center">Aucun produit trouvé.</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</section>
                         <td sec:authorize="hasRole('ADMIN')">
                             <div class="btn-group gap-lg-5 me-lg-5" role="group" aria-label="Actions">
 
