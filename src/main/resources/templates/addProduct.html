@@ -11,7 +11,10 @@
 <section layout:fragment="content">
     <div class="row">
         <div class="col-md-8 offset-md-2">
-            <h2 class="mb-4">Add a New Product</h2>
+            <h2 class="mb-4" th:text="${product.id} != null
+                ? 'Modifier le produit'
+                : 'Ajouter un nouveau produit'">
+            </h2>
             <form th:action="@{/products/admin/add}"
                   th:object="${product}"
                   method="post"
