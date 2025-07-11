@@ -16,7 +16,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @NotBlank(message = "Le nom est obligatoire")
     @Size(min = 2, max = 200)
