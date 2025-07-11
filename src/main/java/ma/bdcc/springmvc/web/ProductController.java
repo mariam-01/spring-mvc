@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/products")
@@ -17,9 +19,16 @@ public class ProductController {
     private final ProductRepo productRepo;
 
     @GetMapping("/all")
-    public String getAllProducts(Model model) {
-        model.addAttribute("products", productRepo.findAll());
-        return "products";
+    public String getAllProducts(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
+        List<Product> products;
+            if (keyword != null && !keyword.isBlank()) {
+                products = productRepo.findByNameContainingIgnoreCase(keyword);
+            } else {
+                products = productRepo.findAll();
+            }
+            model.addAttribute("products", products);
+            model.addAttribute("keyword", keyword);
+            return "products";
     }
 
     @GetMapping("/admin/delete/{id}")

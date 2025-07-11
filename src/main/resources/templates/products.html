@@ -18,7 +18,21 @@
                        class="btn btn-success"
                        th:href="@{/products/admin/add}">+ Nouveau produit</a>
                 </div>
-
+                <form th:action="@{/products/all}" method="get" class="row gx-2 gy-1 align-items-center mb-3">
+                    <div class="col-auto">
+                        <input type="text"
+                               name="keyword"
+                               th:value="${keyword}"
+                               class="form-control"
+                               placeholder="Rechercher par nom…" />
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary">Rechercher</button>
+                    </div>
+                    <div class="col-auto" th:if="${keyword}">
+                        <a th:href="@{/products/all}" class="btn btn-outline-secondary">Effacer</a>
+                    </div>
+                </form>
                 <table class="table table-striped">
                     <thead class="table-dark">
                     <tr>
