@@ -49,6 +49,11 @@
                                    th:onclick="|return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');|">
                                     Supprimer
                                 </a>
+                                <a class="btn btn-sm btn-outline-primary"
+                                   th:href="@{|/products/admin/update/${product.id}|}">
+                                    Modifier
+                                </a>
+                            </div>
 
                         </td>
                     </tr>

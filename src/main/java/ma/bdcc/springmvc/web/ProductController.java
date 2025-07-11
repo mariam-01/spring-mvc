@@ -49,8 +49,8 @@ public class ProductController {
         return "products";
     }*/
 
-    @PostMapping("/update")
-    public String updateProduct(@PathVariable Long id, Model model) {
+    @GetMapping("/admin/update/{id}")
+    public String showUpdateProductForm(@PathVariable Long id, Model model) {
         model.addAttribute("product", productRepo.findById(id).orElse(null));
         return "addProduct";
     }
